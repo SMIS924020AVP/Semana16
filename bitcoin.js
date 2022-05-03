@@ -4,17 +4,16 @@ const fs = require('fs').promises;
 
 axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
     .then((response) => {
-        console.log('Successfully retrieved our list of movies');
+        console.log('Api usada y documento creado');
 
-        var bitcoinList = response.bitcoinList.bpi
-        var valores = [
-                    `${bitcoinList.USD.code} `+`${bitcoinList.USD.rate}`,
-                    `${bitcoinList.EUR.code} `+`${bitcoinList.EUR.rate}`,
+        var data = response.data.bpi
+        var bitcoinList = [
+                    `${data.USD.code} `+`${data.USD.rate}`+"\n",
+                    `${data.EUR.code} `+`${data.EUR.rate}`+"\n",
                    
                 ]
 
-       console.log("el valor del bitcoin es: ")
-       valores.forEach(bitcoinList=>console.log(bitcoinList))
+    
         
 
        fs.writeFile('bitcoin.csv', bitcoinList, (error) =>{
